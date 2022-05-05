@@ -1,0 +1,96 @@
+{
+	"info": {
+		"_postman_id": "75f9435f-49fc-4453-abdf-56c97f0534db",
+		"name": "Desafio02",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Correios",
+			"item": [
+				{
+					"name": "Teste01",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:cli=\"http://cliente.bean.master.sigep.bsb.correios.com.br/\">\r\n    <soapenv:Header/>\r\n    <soapenv:Body>\r\n        <cli:consultaCEP>\r\n            <cep>11070400</cep>\r\n        </cli:consultaCEP>\r\n    </soapenv:Body>\r\n</soapenv:Envelope>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente",
+							"protocol": "https",
+							"host": [
+								"apps",
+								"correios",
+								"com",
+								"br"
+							],
+							"path": [
+								"SigepMasterJPA",
+								"AtendeClienteService",
+								"AtendeCliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Teste02",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"RequestBody\", \"<soapenv:Envelope xmlns:soapenv=\\\"http://schemas.xmlsoap.org/soap/envelope/\\\" xmlns:cli=\\\"http://cliente.bean.master.sigep.bsb.correios.com.br/\\\"> \\\r",
+									"                    <soapenv:Header/> \\\r",
+									"                    <soapenv:Body> \\\r",
+									"                        <cli:consultaCEP> \\\r",
+									"                            <cep>\"+pm.environment.get(\"CEP\")+\"</cep> \\\r",
+									"                        </cli:consultaCEP> \\\r",
+									"                    </soapenv:Body> \\\r",
+									"                </soapenv:Envelope>\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{RequestBody}}",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente",
+							"protocol": "https",
+							"host": [
+								"apps",
+								"correios",
+								"com",
+								"br"
+							],
+							"path": [
+								"SigepMasterJPA",
+								"AtendeClienteService",
+								"AtendeCliente"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
